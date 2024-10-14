@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+   
+    <listener>
+        <listener-class>in.gadgethub.listener.dbConnectionListener</listener-class>
+    </listener>
+    
+    
+    <context-param>
+        <param-name>
+            url
+        </param-name>
+        <param-value>
+            jdbc:oracle:thin:@//localhost:1521/xe
+        </param-value>
+    </context-param>
+    
+    
+    
+    <context-param>
+        <param-name>
+            username
+        </param-name>
+        
+        <param-value>
+            gadgethub
+        </param-value>
+    </context-param>
+    
+    
+    
+    
+    <context-param>
+        <param-name>
+            password
+        </param-name>
+        
+        <param-value>
+            project
+        </param-value>
+    </context-param>
+    
+    
+
+    <servlet>
+        <servlet-name>NewServlet</servlet-name>
+        <servlet-class>in.gadgethub.servlet.NewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewServlet</servlet-name>
+        <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
