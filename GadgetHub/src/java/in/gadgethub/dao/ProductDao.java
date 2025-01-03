@@ -13,21 +13,19 @@ import java.util.List;
  * @author Asus
  */
 public interface ProductDao {
-    public String addProduct(ProductPojo product);
-    
-    
-    
-    public String updateProduct(ProductPojo prevProduct,double updatePrice);
-    public List<ProductPojo> getAllProducts();
-    public List<ProductPojo> getAllProductsByType(String type);
-    public List<ProductPojo> searchAllProducts(String search);
-    public ProductPojo getProdutDetails(String prodId);
-    public int getProductQuantity(String prodId);
-    public String updateProductWithoutimage(String prevProductId,ProductPojo updateProduct);
-    public double getProductPrice(String prodId);
-    
-    public Boolean sellNProduct(String prodId,int n);
-    public List<String> getAllProductsType();
-    public byte[] getImage(String prodId);
-    public String removeProduct(String prodId);
+   public String addProduct(ProductPojo product);
+
+	public String updateProduct(ProductPojo prevProduct, ProductPojo updatedProduct);
+	public String updateProductPrice(String prodId, double updatedPrice);
+	public List<ProductPojo>getAllProducts();
+	public List<ProductPojo>getAllProductsByType(String type);
+	public List<ProductPojo>searchAllProducts(String search);
+	public ProductPojo getProductDetails(String prodId);
+	public int getProductQuantity(String prodId);
+	public String updateProductWithoutImage(String prevProductId, ProductPojo updatedProduct);
+	public double getProductPrice(String prodId);
+	public Boolean sellNProduct(String prodId, int n);
+	public List<String> getAllProductsType();
+	public byte[] getImage(String prodId);
+	public String removeProduct(String prodId);
 }
