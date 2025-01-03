@@ -5,43 +5,35 @@
  */
 package in.gadgethub.servlet;
 
+import in.gadgethub.dao.impl.ProductDaoImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+public class RemoveProductServlet extends HttpServlet {
 
-/**
- *
- * @author Lenovo
- */
-public class NewServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        HttpSession session=request.getSession();
+                String userName=(String)session.getAttribute("userName");
+                String password=(String)session.getAttribute("password");
+                String userType=(String)session.getAttribute("usertype");
+                if(userType==null || !userType.equalsIgnoreCase("admin")){
+                    response.sendRedirect("login.jsp?message=Access denied ! Please login as admin");
+                }else if(userName==null||password==null){
+                    response.sendRedirect("login.jsp?message=Session expired ! Please login again");
+                }
+                String prodId = request.getParameter("prodId");
+                
+                ProductDaoImpl  productDao = new ProductDaoImpl();
+                String status = productDao.removeProduct(prodId);
+                RequestDispatcher rd=request.getRequestDispatcher("RemoveProduct.jsp?message="+status);
+                rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
